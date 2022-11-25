@@ -1,5 +1,8 @@
 package com.pda.myshop.commons.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.pda.myshop.commons.dto.AbstractBaseDomain;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -7,7 +10,8 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "tb_user")
-public class TbUser {
+@JsonInclude(JsonInclude.Include.NON_NULL)// 不为null显示
+public class TbUser extends AbstractBaseDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
