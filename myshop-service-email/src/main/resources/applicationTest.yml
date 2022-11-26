@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: myshop-service-email
+  mail:
+    host: smtp.qq.com
+    # 邮箱授权码
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    # 发送邮件的地址
+    username:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 127.0.0.1:8080
+server:
+  port: 9507
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
