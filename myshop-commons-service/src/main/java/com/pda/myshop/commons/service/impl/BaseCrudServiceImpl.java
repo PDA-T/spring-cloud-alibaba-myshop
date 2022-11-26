@@ -1,5 +1,7 @@
 package com.pda.myshop.commons.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pda.myshop.commons.dto.AbstractBaseDomain;
 import com.pda.myshop.commons.service.BaseCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,5 +72,23 @@ public class BaseCrudServiceImpl<T extends AbstractBaseDomain,M extends MyMapper
 		}
 		// 失败
 		return null;
+	}
+
+	/**
+	 * @Date 2022/11/26 21:32
+	 * @Description 分页查询
+	 * @Param [domain, pageNum, pageSize]
+	 * @return com.github.pagehelper.PageInfo<T>
+	 * @since version-1.0
+	 */
+	@Override
+	public PageInfo<T> page(T domain, Integer pageNum, Integer pageSize) {
+		// 条件构造
+		Example example = new Example(entityClass);
+		example.createCriteria().andEqualTo(domain);
+		// 分页
+		PageHelper.startPage(pageNum,pageSize);
+		PageInfo<T> pageInfo = new PageInfo<T>(mapper.selectByExample(example));
+		return pageInfo;
 	}
 }

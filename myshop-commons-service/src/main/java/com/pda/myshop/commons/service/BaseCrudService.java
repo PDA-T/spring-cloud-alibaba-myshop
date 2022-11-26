@@ -1,5 +1,6 @@
 package com.pda.myshop.commons.service;
 
+import com.github.pagehelper.PageInfo;
 import com.pda.myshop.commons.dto.AbstractBaseDomain;
 
 /**
@@ -28,6 +29,17 @@ public interface BaseCrudService<T extends AbstractBaseDomain> {
 	 * @since version-1.0
 	 */
 	default T save(T domain){
+		return null;
+	}
+
+	/**
+	 * @Date 2022/11/26 21:31
+	 * @Description 分页查询
+	 * @Param [domain, pageNum, pageSize]
+	 * @return com.github.pagehelper.PageInfo<T>
+	 * @since version-1.0
+	 */
+	default PageInfo<T> page(T domain,Integer pageNum,Integer pageSize){
 		return null;
 	}
 }
