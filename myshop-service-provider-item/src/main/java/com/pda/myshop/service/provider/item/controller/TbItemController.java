@@ -33,11 +33,11 @@ public class TbItemController extends AbstractBaseController<TbItem> {
 	@GetMapping(value = "/page/{num}/{size}")
 	@ApiOperation(value = "分页查询")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "num",value = "页码",required = true,paramType = "query",dataType = "int"),
-			@ApiImplicitParam(name = "size",value = "笔数",required = true,paramType = "query",dataType = "int")
+			@ApiImplicitParam(name = "num",value = "页码",required = true,paramType = "path",dataType = "int"),
+			@ApiImplicitParam(name = "size",value = "笔数",required = true,paramType = "path",dataType = "int")
 	})
-	public PageInfo<TbItem> page(@RequestParam(required = true) @PathVariable("num") Integer num,
-								 @RequestParam(required = true) @PathVariable("size") Integer size){
+	public PageInfo<TbItem> page(@PathVariable("num") Integer num,
+								 @PathVariable("size") Integer size){
 		PageInfo<TbItem> page = tbItemService.page(null, num, size);
 		return page;
 	}
