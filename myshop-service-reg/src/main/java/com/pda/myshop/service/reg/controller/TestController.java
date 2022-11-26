@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.pda.myshop.commons.domain.TbUser;
 import com.pda.myshop.commons.dto.AbstractBaseResult;
 import com.pda.myshop.commons.dto.BaseResultFactory;
+import com.pda.myshop.commons.web.AbstractBaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/test")
-public class TestController {
+public class TestController extends AbstractBaseController<TbUser> {
 
 	// 可动态刷新参数
 	@Autowired
@@ -41,9 +42,9 @@ public class TestController {
 		tbUser.setId(1L);
 		tbUser.setUsername("1");
 		if (id == 1){
-			return BaseResultFactory.getInstance().build(request.getRequestURI(),tbUser);
+			return BaseResultFactory.getInstance(response).build(request.getRequestURI(),tbUser);
 		}else {
-			return BaseResultFactory.build(HttpStatus.UNAUTHORIZED.value(),"类型错误","id为1",applicationContext.getEnvironment().getProperty("logging.level.com.pda.myshop"));
+			return error("类型错误",null);
 		}
 	}
 
@@ -67,6 +68,6 @@ public class TestController {
 		List<TbUser> tbUsers = Lists.newArrayList();
 		tbUsers.add(tbUser1);
 		tbUsers.add(tbUser2);
-		return BaseResultFactory.getInstance().build(request.getRequestURI(),2,10,tbUsers);
+		return BaseResultFactory.getInstance(response).build(request.getRequestURI(),2,10,tbUsers);
 	}
 }
