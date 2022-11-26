@@ -6,6 +6,8 @@ import com.pda.myshop.commons.service.TbUserService;
 import com.pda.myshop.commons.validator.BeanValidator;
 import com.pda.myshop.commons.web.AbstractBaseController;
 import com.pda.myshop.service.reg.service.RegService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,7 +52,8 @@ public class RegController extends AbstractBaseController<TbUser> {
 	 * @since version-1.0
 	 */
 	@PostMapping(value = "")
-	public AbstractBaseResult reg(TbUser tbUser){
+	@ApiOperation(value = "用户注册",notes = "用户名邮箱不能为空")
+	public AbstractBaseResult reg(@ApiParam(name = "tbUser",value = "用户模型") TbUser tbUser){
 		// 数据校验
 		String message = BeanValidator.validator(tbUser);
 		if (StringUtils.isNotBlank(message)){
