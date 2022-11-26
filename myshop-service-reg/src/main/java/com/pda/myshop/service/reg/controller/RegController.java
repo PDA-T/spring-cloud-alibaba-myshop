@@ -51,7 +51,7 @@ public class RegController extends AbstractBaseController<TbUser> {
 	 * @return com.pda.myshop.commons.dto.AbstractBaseResult
 	 * @since version-1.0
 	 */
-	@PostMapping(value = "")
+	@PostMapping(value = "/user")
 	@ApiOperation(value = "用户注册",notes = "用户名邮箱不能为空")
 	public AbstractBaseResult reg(@ApiParam(name = "tbUser",value = "用户模型") TbUser tbUser){
 		// 数据校验
