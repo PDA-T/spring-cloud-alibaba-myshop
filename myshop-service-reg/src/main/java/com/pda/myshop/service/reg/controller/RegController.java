@@ -5,6 +5,7 @@ import com.pda.myshop.commons.dto.AbstractBaseResult;
 import com.pda.myshop.commons.service.TbUserService;
 import com.pda.myshop.commons.validator.BeanValidator;
 import com.pda.myshop.commons.web.AbstractBaseController;
+import com.pda.myshop.service.reg.service.RegService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,10 @@ public class RegController extends AbstractBaseController<TbUser> {
 	// 用户
 	@Autowired
 	private TbUserService tbUserService;
+
+	// 邮件
+	@Autowired
+	private RegService regService;
 
 	/**
 	 * @Date 2022/11/22 19:13
@@ -67,6 +72,7 @@ public class RegController extends AbstractBaseController<TbUser> {
 		// 注册用户
 		TbUser user = tbUserService.save(tbUser);
 		if (user != null){
+			regService.sendEmail(user);
 			response.setStatus(HttpStatus.CREATED.value());
 			return success(request.getRequestURI(),user);
 		}
