@@ -10,7 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @Description 用户注册
  * @since version-1.0
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.pda.myshop")
 @EnableDiscoveryClient// 注册进nacos
 @MapperScan(basePackages = "com.pda.myshop.commons.mapper")// 扫描mapper
 public class MyShopServiceRegApplication {
